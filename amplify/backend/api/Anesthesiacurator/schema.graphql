@@ -1,0 +1,19 @@
+type MappingTable @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  labels: AWSJSON
+}
+
+type NewContent @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  link: AWSURL
+  text: String
+  userId: ID!
+}
+
+type Content @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  link: AWSURL
+  userId: ID!
+}
