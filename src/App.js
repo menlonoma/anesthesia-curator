@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import SimpleNav from "./ui-components/SimpleNav";
+import TitleOnly from "./ui-components/TitleOnlyCardCollection";
+import "react-checkbox-tree/lib/react-checkbox-tree.css";
+import CheckboxTree from "react-checkbox-tree";
 
 function App() {
+  const nodes = [
+    {
+      value: "mars",
+      label: "Mars",
+      children: [
+        { value: "phobos", label: "Phobos" },
+        { value: "deimos", label: "Deimos" },
+      ],
+    },
+  ];
+
+  const [checked, setChecked] = useState([]);
+  const [expanded, setExpanded] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <SimpleNav />
+      <TitleOnly />
+      <CheckboxTree
+        nodes={nodes}
+        checked={checked}
+        expanded={expanded}
+        onCheck={(checked) => setChecked({ checked })}
+        onExpand={(expanded) => setExpanded({ expanded })}
+      />
+    </>
   );
 }
 

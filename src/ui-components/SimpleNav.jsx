@@ -76,7 +76,7 @@ export default function SimpleNav(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children="AnesMap"
-          {...getOverrideProps(overrides, "AnesMap")}
+          {...getOverrideProps(overrides, "Anesthesia Curator")}
         ></Text>
       </Flex>
       <Flex
