@@ -7,7 +7,7 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Icon, Image, Text } from "@aws-amplify/ui-react";
+import { Button, Flex, Icon, Image, Text } from "@aws-amplify/ui-react";
 export default function SimpleNav(props) {
   const { overrides, ...rest } = props;
   return (
@@ -76,9 +76,25 @@ export default function SimpleNav(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children="AnesMap"
-          {...getOverrideProps(overrides, "Anesthesia Curator")}
+          {...getOverrideProps(overrides, "AnesMap")}
         ></Text>
       </Flex>
+      <Button
+        shrink="0"
+        size="default"
+        isDisabled={false}
+        variation="link"
+        children="Dashboard"
+        {...getOverrideProps(overrides, "Button37472737")}
+      ></Button>
+      <Button
+        shrink="0"
+        size="default"
+        isDisabled={false}
+        variation="link"
+        children="Add Content"
+        {...getOverrideProps(overrides, "Button37472744")}
+      ></Button>
       <Flex
         gap="40px"
         direction="row"
@@ -92,52 +108,7 @@ export default function SimpleNav(props) {
         position="relative"
         padding="0px 0px 0px 0px"
         {...getOverrideProps(overrides, "Frame 32136582842")}
-      >
-        <Text
-          fontFamily="Inter"
-          fontSize="16px"
-          fontWeight="400"
-          color="rgba(0,0,0,1)"
-          lineHeight="24px"
-          textAlign="left"
-          display="block"
-          direction="column"
-          justifyContent="unset"
-          letterSpacing="0.01px"
-          width="unset"
-          height="unset"
-          gap="unset"
-          alignItems="unset"
-          shrink="0"
-          position="relative"
-          padding="0px 0px 0px 0px"
-          whiteSpace="pre-wrap"
-          children="Dashboard"
-          {...getOverrideProps(overrides, "Dashboard")}
-        ></Text>
-        <Text
-          fontFamily="Inter"
-          fontSize="16px"
-          fontWeight="400"
-          color="rgba(0,0,0,1)"
-          lineHeight="24px"
-          textAlign="left"
-          display="block"
-          direction="column"
-          justifyContent="unset"
-          letterSpacing="0.01px"
-          width="unset"
-          height="unset"
-          gap="unset"
-          alignItems="unset"
-          shrink="0"
-          position="relative"
-          padding="0px 0px 0px 0px"
-          whiteSpace="pre-wrap"
-          children="Add Content"
-          {...getOverrideProps(overrides, "Add Content")}
-        ></Text>
-      </Flex>
+      ></Flex>
       <Flex
         gap="32px"
         direction="row"

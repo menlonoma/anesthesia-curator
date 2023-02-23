@@ -1,9 +1,11 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import SimpleNav from "./ui-components/SimpleNav";
+import SimpleNav from "./simplenav";
 import TitleOnly from "./ui-components/TitleOnlyCardCollection";
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
 import CheckboxTree from "react-checkbox-tree";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AddContent from "./addcontent";
 
 const data = {
   Nodes: [
@@ -60,12 +62,6 @@ const data = {
           Description: "Non-obstetric Surgery in a pregnant patient",
           ItemID: 17,
           VisualID: "G.",
-          Nodes: [
-            { Description: "Pediatric surgery", ItemID: 130, VisualID: "C." },
-            { Description: "Neonatal surgery", ItemID: 140, VisualID: "D." },
-            { Description: "Labor analgesia", ItemID: 150, VisualID: "E." },
-            { Description: "Cesarean section", ItemID: 160, VisualID: "F." },
-          ],
         },
         {
           Description:
@@ -118,25 +114,6 @@ const data = {
   Table: "EPAOutline",
 };
 
-// function getCategories() {
-//   const res = {};
-//   function recurse(obj, current) {
-//     for (const key in obj) {
-//       let value = obj[key];
-//       if (value != undefined) {
-//         if (value && typeof value === "object") {
-//           recurse(value, key);
-//         } else {
-//           // Do your stuff here to var value
-//           res[key] = value;
-//         }
-//       }
-//     }
-//   }
-//   recurse(data);
-//   return res;
-// }
-
 // const nodes = [
 //   {
 //     value: "mars",
@@ -176,7 +153,7 @@ function App() {
     function recurse(obj) {
       const category = {};
       category.value = obj.ItemID;
-      category.label = obj.VisualID + obj.Description;
+      category.label = obj.VisualID + " " + obj.Description;
       let nodes = obj.Nodes;
       if (nodes !== undefined) {
         category.children = [];
@@ -200,15 +177,20 @@ function App() {
 
   return (
     <>
-      <SimpleNav />
-      <TitleOnly />
-      <CheckboxTree
-        nodes={categories}
-        checked={checked}
-        expanded={expanded}
-        onCheck={(checked) => setChecked(checked)}
-        onExpand={(expanded) => setExpanded(expanded)}
-      />
+      <Router>
+        <SimpleNav />
+        <Routes>
+          <Route path="/" element={<TitleOnly />} />
+          <Route path="/add" element={<AddContent />} />
+        </Routes>
+        <CheckboxTree
+          nodes={categories}
+          checked={checked}
+          expanded={expanded}
+          onCheck={(checked) => setChecked(checked)}
+          onExpand={(expanded) => setExpanded(expanded)}
+        />
+      </Router>
     </>
   );
 }

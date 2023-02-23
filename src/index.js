@@ -9,6 +9,7 @@ import { Amplify } from "aws-amplify";
 
 import { AmplifyProvider } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
+export { default as SimpleNav } from "./simplenav";
 
 Amplify.configure(config);
 

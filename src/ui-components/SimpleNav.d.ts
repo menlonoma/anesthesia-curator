@@ -6,16 +6,16 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { FlexProps, IconProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
+import { ButtonProps, FlexProps, IconProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type SimpleNavOverridesProps = {
     SimpleNav?: PrimitiveOverrideProps<FlexProps>;
     Logo?: PrimitiveOverrideProps<FlexProps>;
     "Star 1"?: PrimitiveOverrideProps<IconProps>;
     AnesMap?: PrimitiveOverrideProps<TextProps>;
+    Button37472737?: PrimitiveOverrideProps<ButtonProps>;
+    Button37472744?: PrimitiveOverrideProps<ButtonProps>;
     "Frame 32136582842"?: PrimitiveOverrideProps<FlexProps>;
-    Dashboard?: PrimitiveOverrideProps<TextProps>;
-    "Add Content"?: PrimitiveOverrideProps<TextProps>;
     "Frame 32136582847"?: PrimitiveOverrideProps<FlexProps>;
     image?: PrimitiveOverrideProps<ImageProps>;
 } & EscapeHatchProps;
