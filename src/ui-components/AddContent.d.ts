@@ -17,7 +17,8 @@ export declare type AddContentOverridesProps = {
     TextField36642825?: PrimitiveOverrideProps<TextFieldProps>;
     TextAreaField?: PrimitiveOverrideProps<TextAreaFieldProps>;
     TextField36642832?: PrimitiveOverrideProps<TextFieldProps>;
-    Button?: PrimitiveOverrideProps<ButtonProps>;
+    Button37502745?: PrimitiveOverrideProps<ButtonProps>;
+    Button37472748?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
 export declare type AddContentProps = React.PropsWithChildren<Partial<FlexProps> & {
     overrides?: AddContentOverridesProps | undefined | null;

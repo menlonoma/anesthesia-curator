@@ -81,10 +81,7 @@ export default function ArticleFull(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children="New Amplify Studio gives designers the ability to export UI to React code"
-              {...getOverrideProps(
-                overrides,
-                "New Amplify Studio gives designers the ability to export UI to React code"
-              )}
+              {...getOverrideProps(overrides, "titleText")}
             ></Text>
           </Flex>
           <Flex
@@ -121,13 +118,45 @@ export default function ArticleFull(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children="AWS Amplify Studio is a visual development environment for building full-stack web and mobile apps that grows with your business. Studio builds on existing backend building capabilities in AWS Amplify, allowing you to build your UI faster with a set of ready-to-use UI components that are editable in Figma. With Studio, you can quickly build an entire web app, front-to-back, with minimal coding, while still maintaining full control over your app design and behavior through code. Ship faster, scale effortlessly, and delight every user.&#xA;&#xA;AWS Amplify Studio is a visual development environment for building full-stack web and mobile apps that grows with your business. Studio builds on existing backend building capabilities in AWS Amplify, allowing you to build your UI faster with a set of ready-to-use UI components that are editable in Figma. With Studio, you can quickly build an entire web app, front-to-back, with minimal coding, while still maintaining full control over your app design and behavior through code. Ship faster, scale effortlessly, and delight every user."
-              {...getOverrideProps(
-                overrides,
-                "AWS Amplify Studio is a visual development environment for building full-stack web and mobile apps that grows with your business. Studio builds on existing backend building capabilities in AWS Amplify, allowing you to build your UI faster with a set of ready-to-use UI components that are editable in Figma. With Studio, you can quickly build an entire web app, front-to-back, with minimal coding, while still maintaining full control over your app design and behavior through code. Ship faster, scale effortlessly, and delight every user. AWS Amplify Studio is a visual development environment for building full-stack web and mobile apps that grows with your business. Studio builds on existing backend building capabilities in AWS Amplify, allowing you to build your UI faster with a set of ready-to-use UI components that are editable in Figma. With Studio, you can quickly build an entire web app, front-to-back, with minimal coding, while still maintaining full control over your app design and behavior through code. Ship faster, scale effortlessly, and delight every user."
-              )}
+              {...getOverrideProps(overrides, "contentText")}
             ></Text>
           </Flex>
         </Flex>
+      </Flex>
+      <Flex
+        gap="16px"
+        direction="row"
+        width="unset"
+        height="unset"
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        shrink="0"
+        position="relative"
+        padding="0px 0px 0px 0px"
+        {...getOverrideProps(overrides, "Link")}
+      >
+        <Text
+          fontFamily="Inter"
+          fontSize="16px"
+          fontWeight="400"
+          color="rgba(92,102,112,1)"
+          lineHeight="24px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          letterSpacing="0.01px"
+          width="unset"
+          height="unset"
+          gap="unset"
+          alignItems="unset"
+          shrink="0"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children="Mapped"
+          {...getOverrideProps(overrides, "URL")}
+        ></Text>
       </Flex>
     </Flex>
   );

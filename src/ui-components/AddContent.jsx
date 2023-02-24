@@ -127,8 +127,14 @@ export default function AddContent(props) {
         size="default"
         isDisabled={false}
         variation="default"
-        children="Default Button"
-        {...getOverrideProps(overrides, "Button")}
+        {...getOverrideProps(overrides, "Button37502745")}
+      ></Button>
+      <Button
+        shrink="0"
+        size="default"
+        isDisabled={false}
+        variation="primary"
+        {...getOverrideProps(overrides, "Button37472748")}
       ></Button>
     </Flex>
   );
