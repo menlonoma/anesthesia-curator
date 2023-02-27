@@ -5,6 +5,7 @@ import TitleOnly from "./ui-components/TitleOnlyCardCollection";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AddContent from "./addcontent";
 import SubmitMapping from "./submitMapping";
+import SuggestMapping from "./suggestMapping";
 
 // const nodes = [
 //   {
@@ -46,6 +47,10 @@ function App() {
             element={<AddContent content={content} setContent={setContent} />}
           />
           <Route path="/submit" element={<SubmitMapping content={content} />} />
+          <Route
+            path="/suggest"
+            element={<SuggestMapping content={content} />}
+          />
         </Routes>
       </Router>
     </>

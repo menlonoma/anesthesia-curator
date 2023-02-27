@@ -48,6 +48,7 @@ function AddContent({ content, setContent }) {
     },
     Button37472748: {
       children: "Suggest mapping",
+      onClick: () => navigate("/suggest"),
     },
   };
 

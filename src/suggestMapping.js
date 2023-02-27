@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
+import axios from "axios";
 import { ArticleFull } from "./ui-components";
 import CheckboxTree from "react-checkbox-tree";
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
@@ -97,76 +98,74 @@ const data = {
   Table: "SituationalOutline",
 };
 
-function SubmitMapping({ content }) {
-  const [categories, setCategories] = useState([]);
-  const [checked, setChecked] = useState([]);
-  const [expanded, setExpanded] = useState([]);
+function SuggestMapping({ content }) {
+  const suggestions = [];
 
-  function getCategories() {
-    const res = [];
-    const api_call_json = data;
-    const nodes = api_call_json.Nodes;
+  const useAxiosPost = (url, payload, headers) => {
+    const [data, setData] = useState(null);
+    const [error, setError] = useState("");
+    const [loaded, setLoaded] = useState(false);
 
-    function recurse(obj) {
-      const category = {};
-      category.value = obj.ItemID;
-      category.label = obj.VisualID + " " + obj.Description;
-      let nodes = obj.Nodes;
-      if (nodes !== undefined) {
-        category.children = [];
-        nodes.forEach((node) => {
-          category.children.push(recurse(node));
-        });
-      }
-      return category;
-    }
+    useEffect(() => {
+      axios
+        .post(url, payload, headers)
+        .then((response) => setData(response.data))
+        .catch((error) => setError(error.message))
+        .finally(() => setLoaded(true));
+    }, []);
 
-    nodes.forEach((node) => {
-      res.push(recurse(node));
-    });
-
-    return res;
-  }
-
-  if (categories.length === 0) {
-    setCategories(getCategories());
-  }
-
-  const overrides = {
-    titleText: {
-      children: content.title,
-    },
-    contentText: {
-      children: content.text,
-    },
-    URL: {
-      children: content.link,
-    },
+    return { data, error, loaded };
   };
 
-  return (
-    <>
-      <ArticleFull overrides={overrides} />
-      <CheckboxTree
-        nodes={categories}
-        checked={checked}
-        expanded={expanded}
-        onCheck={(checked) => setChecked(checked)}
-        onExpand={(expanded) => setExpanded(expanded)}
-      />
-      <Divider></Divider>
-      <div></div>
-      <Button
-        shrink="0"
-        alignSelf="stretch"
-        size="large"
-        isDisabled={false}
-        variation="primary"
-        children="Submit"
-        {...getOverrideProps(overrides, "Submit")}
-      />
-    </>
+  const customHeaders = {
+    Authorization: "Bearer " + process.env.REACT_APP_HF_BEARER_TOKEN,
+    "Content-Type": "application/json",
+  };
+
+  axios.interceptors.request.use((request) => {
+    console.log("Starting Request", JSON.stringify(request, null, 2));
+    return request;
+  });
+
+  const { data, error, loaded } = useAxiosPost(
+    "https://api-inference.huggingface.co/models/gjbooth2/autotrain-glenn_ntsa_1-3621496854",
+    { inputs: content.text },
+    { headers: customHeaders }
   );
+
+  const stringifiedData = useMemo(() => {
+    return JSON.stringify(data || {});
+  }, [data]);
+
+  if (loaded) {
+    return error ? <span>Error: {error}</span> : <p>{stringifiedData}</p>;
+  }
+  return <span>Loading...</span>;
 }
 
-export default SubmitMapping;
+// return (
+//   <>
+//     <ArticleFull overrides={overrides} />
+//     <CheckboxTree
+//       nodes={categories}
+//       checked={checked}
+//       expanded={expanded}
+//       onCheck={(checked) => setChecked(checked)}
+//       onExpand={(expanded) => setExpanded(expanded)}
+//     />
+//     <Divider></Divider>
+//     <div></div>
+//     <Button
+//       shrink="0"
+//       alignSelf="stretch"
+//       size="large"
+//       isDisabled={false}
+//       variation="primary"
+//       children="Submit"
+//       {...getOverrideProps(overrides, "Submit")}
+//     />
+//   </>
+// );
+//}
+
+export default SuggestMapping;
