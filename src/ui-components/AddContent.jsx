@@ -90,6 +90,8 @@ export default function AddContent(props) {
               {...getOverrideProps(overrides, "Add new content")}
             ></Text>
             <TextField
+              width="300px"
+              height="unset"
               shrink="0"
               placeholder="Placeholder"
               size="default"
@@ -100,6 +102,7 @@ export default function AddContent(props) {
             ></TextField>
             <TextAreaField
               width="912px"
+              height="unset"
               grow="1"
               shrink="1"
               basis="0"
@@ -111,6 +114,8 @@ export default function AddContent(props) {
               {...getOverrideProps(overrides, "TextAreaField")}
             ></TextAreaField>
             <TextField
+              width="300px"
+              height="unset"
               shrink="0"
               placeholder="Placeholder"
               size="default"
@@ -123,6 +128,8 @@ export default function AddContent(props) {
         </Flex>
       </Flex>
       <Button
+        width="unset"
+        height="unset"
         shrink="0"
         size="default"
         isDisabled={false}
@@ -130,6 +137,8 @@ export default function AddContent(props) {
         {...getOverrideProps(overrides, "Button37502745")}
       ></Button>
       <Button
+        width="unset"
+        height="unset"
         shrink="0"
         size="default"
         isDisabled={false}

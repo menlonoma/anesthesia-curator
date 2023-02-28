@@ -6,18 +6,17 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { ButtonProps, FlexProps, IconProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
+import { ButtonProps, FlexProps, IconProps, TextProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type SimpleNavOverridesProps = {
     SimpleNav?: PrimitiveOverrideProps<FlexProps>;
     Logo?: PrimitiveOverrideProps<FlexProps>;
     "Star 1"?: PrimitiveOverrideProps<IconProps>;
-    AnesMap?: PrimitiveOverrideProps<TextProps>;
+    "Anesthesia Map"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 418"?: PrimitiveOverrideProps<FlexProps>;
     Button37472737?: PrimitiveOverrideProps<ButtonProps>;
     Button37472744?: PrimitiveOverrideProps<ButtonProps>;
-    "Frame 32136582842"?: PrimitiveOverrideProps<FlexProps>;
-    "Frame 32136582847"?: PrimitiveOverrideProps<FlexProps>;
-    image?: PrimitiveOverrideProps<ImageProps>;
+    Button37542827?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
 export declare type SimpleNavProps = React.PropsWithChildren<Partial<FlexProps> & {
     overrides?: SimpleNavOverridesProps | undefined | null;

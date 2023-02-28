@@ -7,17 +7,17 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Button, Flex, Icon, Image, Text } from "@aws-amplify/ui-react";
+import { Button, Flex, Icon, Text } from "@aws-amplify/ui-react";
 export default function SimpleNav(props) {
   const { overrides, ...rest } = props;
   return (
     <Flex
-      gap="20px"
+      gap="597px"
       direction="row"
-      width="1440px"
+      width="1480px"
       height="unset"
-      justifyContent="center"
-      alignItems="center"
+      justifyContent="space-between"
+      alignItems="flex-start"
       position="relative"
       padding="24px 32px 24px 32px"
       backgroundColor="rgba(255,255,255,1)"
@@ -25,14 +25,13 @@ export default function SimpleNav(props) {
       {...rest}
     >
       <Flex
-        gap="2px"
+        gap="6px"
         direction="row"
         width="unset"
-        height="unset"
+        height="40px"
         justifyContent="center"
         alignItems="center"
         shrink="0"
-        alignSelf="stretch"
         position="relative"
         padding="0px 0px 0px 0px"
         {...getOverrideProps(overrides, "Logo")}
@@ -57,12 +56,12 @@ export default function SimpleNav(props) {
           {...getOverrideProps(overrides, "Star 1")}
         ></Icon>
         <Text
-          fontFamily="Inter"
+          fontFamily="Lora"
           fontSize="20px"
-          fontWeight="600"
+          fontWeight="400"
           color="rgba(0,0,0,1)"
           textTransform="capitalize"
-          lineHeight="24.204544067382812px"
+          lineHeight="25.599998474121094px"
           textAlign="left"
           display="block"
           direction="column"
@@ -75,68 +74,52 @@ export default function SimpleNav(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="AnesMap"
-          {...getOverrideProps(overrides, "AnesMap")}
+          children="Anesthesia Map"
+          {...getOverrideProps(overrides, "Anesthesia Map")}
         ></Text>
       </Flex>
-      <Button
-        shrink="0"
-        size="default"
-        isDisabled={false}
-        variation="link"
-        children="Dashboard"
-        {...getOverrideProps(overrides, "Button37472737")}
-      ></Button>
-      <Button
-        shrink="0"
-        size="default"
-        isDisabled={false}
-        variation="link"
-        children="Add Content"
-        {...getOverrideProps(overrides, "Button37472744")}
-      ></Button>
       <Flex
-        gap="40px"
+        gap="10px"
         direction="row"
         width="unset"
         height="unset"
         justifyContent="flex-start"
-        alignItems="center"
-        grow="1"
-        shrink="1"
-        basis="0"
+        alignItems="flex-start"
+        shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Frame 32136582842")}
-      ></Flex>
-      <Flex
-        gap="32px"
-        direction="row"
-        width="unset"
-        height="unset"
-        justifyContent="flex-end"
-        alignItems="center"
-        grow="1"
-        shrink="1"
-        basis="0"
-        position="relative"
-        padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Frame 32136582847")}
+        {...getOverrideProps(overrides, "Frame 418")}
       >
-        <Image
-          width="45px"
-          height="45px"
-          display="block"
-          gap="unset"
-          alignItems="unset"
-          justifyContent="unset"
+        <Button
+          width="unset"
+          height="unset"
           shrink="0"
-          position="relative"
-          borderRadius="160px"
-          padding="0px 0px 0px 0px"
-          objectFit="cover"
-          {...getOverrideProps(overrides, "image")}
-        ></Image>
+          size="default"
+          isDisabled={false}
+          variation="link"
+          children="Dashboard"
+          {...getOverrideProps(overrides, "Button37472737")}
+        ></Button>
+        <Button
+          width="unset"
+          height="unset"
+          shrink="0"
+          size="default"
+          isDisabled={false}
+          variation="link"
+          children="Add Content"
+          {...getOverrideProps(overrides, "Button37472744")}
+        ></Button>
+        <Button
+          width="unset"
+          height="unset"
+          shrink="0"
+          size="default"
+          isDisabled={false}
+          variation="default"
+          children="Default Button"
+          {...getOverrideProps(overrides, "Button37542827")}
+        ></Button>
       </Flex>
     </Flex>
   );
