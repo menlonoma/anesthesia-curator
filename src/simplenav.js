@@ -3,7 +3,7 @@ import { SimpleNav as UINavBar } from "./ui-components";
 import { useNavigate } from "react-router";
 import { Divider, Menu, MenuItem } from "@aws-amplify/ui-react";
 
-function SimpleNav() {
+function SimpleNav({ signOut }) {
   let navigate = useNavigate();
 
   const overrides = {
@@ -12,6 +12,10 @@ function SimpleNav() {
     },
     Button37472744: {
       onClick: () => navigate("/add"),
+    },
+    Button37542827: {
+      children: "Sign out",
+      onClick: () => signOut(),
     },
   };
 

@@ -10,6 +10,11 @@
       "StackName": "amplify-anesthesiacurator-staging-105016",
       "StackId": "arn:aws:cloudformation:us-east-1:139894786343:stack/amplify-anesthesiacurator-staging-105016/e33644b0-9bd4-11ed-bb62-0af7971085c3",
       "AmplifyAppId": "d306wqr4y8mnol"
+    },
+    "categories": {
+      "auth": {
+        "Anesthesiacurator": {}
+      }
     }
   }
 }

@@ -1,4 +1,5 @@
 import "./App.css";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 import { useState } from "react";
 import SimpleNav from "./simplenav";
 import TitleOnly from "./ui-components/TitleOnlyCardCollection";
@@ -7,13 +8,13 @@ import AddContent from "./addcontent";
 import SubmitMapping from "./submitMapping";
 import SuggestMapping from "./suggestMapping";
 
-function App() {
+function App({ signOut, user }) {
   const [content, setContent] = useState({ title: "", text: "", link: "" });
 
   return (
     <>
       <Router>
-        <SimpleNav />
+        <SimpleNav signOut={signOut} />
         <Routes>
           <Route path="/" element={<TitleOnly />} />
           <Route
@@ -34,4 +35,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App);
