@@ -1,3 +1,7 @@
+# Setup
+
+Create a file named `.env.local` at the root level. `.env.local` should contain `REACT_APP_HF_BEARER_TOKEN = 'token_goes_here'` with the correct huggingface bearer token replacing `token_goes_here`. The prefix "Bearer " does not need to be included.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

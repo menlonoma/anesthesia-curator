@@ -97,9 +97,9 @@ const data = {
   Table: "SituationalOutline",
 };
 
-function SubmitMapping({ content }) {
+function SubmitMapping({ content, suggestions }) {
   const [categories, setCategories] = useState([]);
-  const [checked, setChecked] = useState([]);
+  const [checked, setChecked] = useState(suggestions);
   const [expanded, setExpanded] = useState([]);
 
   function getCategories() {
@@ -147,13 +147,16 @@ function SubmitMapping({ content }) {
   return (
     <>
       <ArticleFull overrides={overrides} />
-      <CheckboxTree
-        nodes={categories}
-        checked={checked}
-        expanded={expanded}
-        onCheck={(checked) => setChecked(checked)}
-        onExpand={(expanded) => setExpanded(expanded)}
-      />
+      <h3 style={{ marginLeft: 20, marginBottom: 0 }}>NTSA Categories</h3>
+      <div style={{ marginLeft: 20, marginBottom: 20 }}>
+        <CheckboxTree
+          nodes={categories}
+          checked={checked}
+          expanded={expanded}
+          onCheck={(checked) => setChecked(checked)}
+          onExpand={(expanded) => setExpanded(expanded)}
+        />
+      </div>
       <Divider></Divider>
       <div></div>
       <Button
@@ -163,6 +166,7 @@ function SubmitMapping({ content }) {
         isDisabled={false}
         variation="primary"
         children="Submit"
+        style={{ marginLeft: 20, marginTop: 20 }}
         {...getOverrideProps(overrides, "Submit")}
       />
     </>
