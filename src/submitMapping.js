@@ -7,6 +7,7 @@ import "@aws-amplify/ui-react/styles.css";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { useNavigate } from "react-router";
 import "./submitMapping.css";
+import SaveMapping from "./saveMapping";
 
 const data = {
   Nodes: [
@@ -103,6 +104,7 @@ function SubmitMapping({ content, suggestions }) {
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState(suggestions);
   const [expanded, setExpanded] = useState([]);
+  const [triggerSave, setTriggerSave] = useState(false);
 
   function getCategories() {
     const res = [];
@@ -169,10 +171,11 @@ function SubmitMapping({ content, suggestions }) {
         isDisabled={false}
         variation="primary"
         children="Submit"
-        onClick={() => navigate("/save")}
+        onClick={() => setTriggerSave(true)}
         style={{ marginLeft: 20, marginTop: 20 }}
         {...getOverrideProps(overrides, "Submit")}
       />
+      {triggerSave ? <SaveMapping content={content} checked={checked} /> : null}
     </>
   );
 }

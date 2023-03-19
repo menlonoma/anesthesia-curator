@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AddContent from "./addcontent";
 import SubmitMapping from "./submitMapping";
 import SuggestMapping from "./suggestMapping";
-import SaveMapping from "./saveMapping";
 
 function App({ signOut, user }) {
   const [content, setContent] = useState({ title: "", text: "", link: "" });
@@ -30,7 +29,6 @@ function App({ signOut, user }) {
             path="/suggest"
             element={<SuggestMapping content={content} />}
           />
-          <Route path="/save" element={<SaveMapping content={content} />} />
         </Routes>
       </Router>
     </>

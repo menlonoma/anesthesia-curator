@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import axios from "axios";
 
-function SaveMapping({ content }) {
+function SaveMapping({ content, checked }) {
   const useAxiosPost = (url, payload, headers) => {
     const [data, setData] = useState(null);
     const [error, setError] = useState("");
@@ -22,11 +22,12 @@ function SaveMapping({ content }) {
     return { data, error, loaded };
   };
 
-  // for debugging
-  // axios.interceptors.request.use((request) => {
-  //   console.log("Starting Request", JSON.stringify(request, null, 2));
-  //   return request;
-  // });
+  const skills = [];
+
+  checked.forEach((element) => {
+    const obj = { SkillType: 3, SkillId: element, PrimarySkill: 1 };
+    skills.push(obj);
+  });
 
   const apidata = JSON.stringify({
     SourceId: "User Input test",
@@ -36,7 +37,7 @@ function SaveMapping({ content }) {
     ResourceTitle: content.title,
     ResourceDescription: content.text,
     CuratorId: "test user",
-    Skills: [{ SkillType: 3, SkillId: 3, PrimarySkill: 1 }],
+    Skills: skills,
   });
 
   console.log(apidata);
