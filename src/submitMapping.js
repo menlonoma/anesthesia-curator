@@ -5,6 +5,7 @@ import "react-checkbox-tree/lib/react-checkbox-tree.css";
 import { Button, Divider } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { useNavigate } from "react-router";
 import "./submitMapping.css";
 
 const data = {
@@ -98,6 +99,7 @@ const data = {
 };
 
 function SubmitMapping({ content, suggestions }) {
+  let navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState(suggestions);
   const [expanded, setExpanded] = useState([]);
@@ -155,6 +157,7 @@ function SubmitMapping({ content, suggestions }) {
           expanded={expanded}
           onCheck={(checked) => setChecked(checked)}
           onExpand={(expanded) => setExpanded(expanded)}
+          noCascade={true}
         />
       </div>
       <Divider></Divider>
@@ -166,6 +169,7 @@ function SubmitMapping({ content, suggestions }) {
         isDisabled={false}
         variation="primary"
         children="Submit"
+        onClick={() => navigate("/save")}
         style={{ marginLeft: 20, marginTop: 20 }}
         {...getOverrideProps(overrides, "Submit")}
       />
