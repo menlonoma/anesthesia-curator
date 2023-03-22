@@ -14,6 +14,9 @@ function SubmitMapping({ content, suggestions }) {
   const [checked, setChecked] = useState(suggestions);
   const [expanded, setExpanded] = useState([]);
   const [triggerSave, setTriggerSave] = useState(false);
+  const parentSet = new Set();
+  // parentSet is global to collect all ancestors of suggestions,
+  //  updated by getCategories()
 
   const useAxiosPost = (url, payload, headers) => {
     const [data, setData] = useState(null);
@@ -44,19 +47,35 @@ function SubmitMapping({ content, suggestions }) {
     apidata
   );
 
+  // getCategories
+  // Args - none
+  // Returns
+  //  Nested array of nodes formatted for CheckboxTree, also includes
+  //  array of ancestors with each node to make tree expansion easier
   function getCategories() {
     const res = [];
     const nodes = data.Nodes;
 
-    function recurse(obj) {
+    function recurse(obj, parents) {
       const category = {};
       category.value = obj.ItemID;
       category.label = obj.VisualID + ". " + obj.Description;
+      let newParents = [];
+      if (parents) {
+        // use slice to copy parents array, cannot pass by reference
+        newParents = parents.slice(0);
+        if (suggestions && suggestions.includes(obj.ItemID.toString())) {
+          parents.forEach((parent) => {
+            parentSet.add(parent);
+          });
+        }
+      }
       let nodes = obj.Nodes;
       if (nodes !== undefined) {
         category.children = [];
+        newParents.push(obj.ItemID);
         nodes.forEach((node) => {
-          category.children.push(recurse(node));
+          category.children.push(recurse(node, newParents.slice(0)));
         });
       }
       return category;
@@ -71,6 +90,10 @@ function SubmitMapping({ content, suggestions }) {
 
   if (categories.length === 0 && data) {
     setCategories(getCategories());
+  }
+
+  if (parentSet.size > 0 && expanded.length === 0) {
+    setExpanded(Array.from(parentSet));
   }
 
   const overrides = {
