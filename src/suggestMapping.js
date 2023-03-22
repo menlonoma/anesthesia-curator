@@ -24,14 +24,8 @@ function SuggestMapping({ content }) {
     "Content-Type": "application/json",
   };
 
-  // for debugging
-  // axios.interceptors.request.use((request) => {
-  //   console.log("Starting Request", JSON.stringify(request, null, 2));
-  //   return request;
-  // });
-
   const { data, error, loaded } = useAxiosPost(
-    "https://api-inference.huggingface.co/models/gjbooth2/autotrain-glenn_ntsa_1-3621496854",
+    "https://api-inference.huggingface.co/models/gjbooth2/autotrain-glenn_ntsa_2-40841105633",
     { inputs: content.text },
     { headers: customHeaders }
   );
@@ -40,9 +34,15 @@ function SuggestMapping({ content }) {
     return JSON.stringify(data || {});
   }, [data]);
 
-  const suggestions = [9, 15, 21];
-
+  const suggestions = [];
   if (loaded) {
+    if (data) {
+      data[0].forEach((element) => {
+        if (element.score > 0.25 && element.label !== "ItemID_Nan") {
+          suggestions.push(element.label.slice(7));
+        }
+      });
+    }
     return error ? (
       <span>Error: {error}</span>
     ) : (
