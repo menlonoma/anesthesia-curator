@@ -25,7 +25,7 @@ function SaveMapping({ content, checked }) {
   const skills = [];
 
   checked.forEach((element) => {
-    const obj = { SkillType: 3, SkillId: element, PrimarySkill: 1 };
+    const obj = { SkillType: 3, SkillId: parseInt(element), PrimarySkill: 1 };
     skills.push(obj);
   });
 
@@ -40,7 +40,6 @@ function SaveMapping({ content, checked }) {
     Skills: skills,
   });
 
-  console.log(apidata);
   const { data, error, loaded } = useAxiosPost(
     "https://emory.wolftechnology.net/services/resourcein/",
     apidata
@@ -49,8 +48,6 @@ function SaveMapping({ content, checked }) {
   const stringifiedData = useMemo(() => {
     return JSON.stringify(data || {});
   }, [data]);
-
-  // TODO: Memoize suggestions
 
   if (loaded) {
     return error ? (
