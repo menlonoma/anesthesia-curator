@@ -60,6 +60,10 @@ function SubmitMapping({ content, suggestions }) {
       const category = {};
       category.value = obj.ItemID;
       category.label = obj.VisualID + ". " + obj.Description;
+      // highlight
+      if (suggestions && suggestions.includes(obj.ItemID.toString())) {
+        category.label = <mark>{category.label}</mark>;
+      }
       let newParents = [];
       if (parents) {
         // use slice to copy parents array, cannot pass by reference
