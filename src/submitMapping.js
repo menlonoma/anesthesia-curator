@@ -5,7 +5,6 @@ import "react-checkbox-tree/lib/react-checkbox-tree.css";
 import { Button, Divider } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import "./submitMapping.css";
 import SaveMapping from "./saveMapping";
 import axios from "axios";
 

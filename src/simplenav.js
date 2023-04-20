@@ -17,6 +17,10 @@ function SimpleNav({ signOut }) {
       children: "Sign out",
       onClick: () => signOut(),
     },
+    SimpleNav: {
+      width: "100vw",
+      gap: "6px",
+    },
   };
 
   return (
