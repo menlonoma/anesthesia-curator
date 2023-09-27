@@ -1,3 +1,7 @@
+// SuggestMapping
+// Calls Huggingface API to retrieve suggestions from model
+// Passes suggestions to SubmitMapping
+
 import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import SubmitMapping from "./submitMapping";

@@ -6,7 +6,7 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { ButtonProps, FlexProps, TextAreaFieldProps, TextFieldProps, TextProps } from "@aws-amplify/ui-react";
+import { ButtonProps, FlexProps, SelectFieldProps, TextAreaFieldProps, TextFieldProps, TextProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type AddContentOverridesProps = {
     AddContent?: PrimitiveOverrideProps<FlexProps>;
@@ -17,6 +17,8 @@ export declare type AddContentOverridesProps = {
     TextField36642825?: PrimitiveOverrideProps<TextFieldProps>;
     TextAreaField?: PrimitiveOverrideProps<TextAreaFieldProps>;
     TextField36642832?: PrimitiveOverrideProps<TextFieldProps>;
+    SelectField?: PrimitiveOverrideProps<SelectFieldProps>;
+    TextField4050385?: PrimitiveOverrideProps<TextFieldProps>;
     Button37502745?: PrimitiveOverrideProps<ButtonProps>;
     Button37472748?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;

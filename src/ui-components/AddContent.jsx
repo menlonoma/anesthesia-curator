@@ -10,6 +10,7 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import {
   Button,
   Flex,
+  SelectField,
   Text,
   TextAreaField,
   TextField,
@@ -102,10 +103,8 @@ export default function AddContent(props) {
             ></TextField>
             <TextAreaField
               width="912px"
-              height="unset"
-              grow="1"
-              shrink="1"
-              basis="0"
+              height="138px"
+              shrink="0"
               placeholder="Placeholder"
               size="default"
               isDisabled={false}
@@ -116,13 +115,35 @@ export default function AddContent(props) {
             <TextField
               width="300px"
               height="unset"
+              placeholder="i.e. Toolbox Quizbank"
+              shrink="0"
+              size="default"
+              isDisabled={false}
+              labelHidden={false}
+              variation="default"
+              {...getOverrideProps(overrides, "TextField36642832")}
+            ></TextField>
+            <SelectField
+              width="300px"
+              height="unset"
               shrink="0"
               placeholder="Placeholder"
               size="default"
               isDisabled={false}
               labelHidden={false}
               variation="default"
-              {...getOverrideProps(overrides, "TextField36642832")}
+              {...getOverrideProps(overrides, "SelectField")}
+            ></SelectField>
+            <TextField
+              width="300px"
+              height="unset"
+              shrink="0"
+              placeholder="Placeholder"
+              size="default"
+              isDisabled={false}
+              labelHidden={false}
+              variation="default"
+              {...getOverrideProps(overrides, "TextField4050385")}
             ></TextField>
           </Flex>
         </Flex>

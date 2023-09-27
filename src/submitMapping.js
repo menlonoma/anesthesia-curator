@@ -1,3 +1,7 @@
+// SubmitMapping
+// Retrieves categories from /outline endpoint
+// Displays checkboxes with ML model suggestions if provided
+
 import React, { useState, useEffect, useRef } from "react";
 import { ArticleFull } from "./ui-components";
 import CheckboxTree from "react-checkbox-tree";

@@ -16,6 +16,10 @@ export declare type ArticleFullOverridesProps = {
     titleText?: PrimitiveOverrideProps<TextProps>;
     Article?: PrimitiveOverrideProps<FlexProps>;
     contentText?: PrimitiveOverrideProps<TextProps>;
+    "Name of source29766862"?: PrimitiveOverrideProps<FlexProps>;
+    "Name of source29766863"?: PrimitiveOverrideProps<TextProps>;
+    "Type of source40831001"?: PrimitiveOverrideProps<FlexProps>;
+    "Type of source40831002"?: PrimitiveOverrideProps<TextProps>;
     Link?: PrimitiveOverrideProps<FlexProps>;
     URL?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
