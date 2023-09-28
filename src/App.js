@@ -9,7 +9,13 @@ import SubmitMapping from "./submitMapping";
 import SuggestMapping from "./suggestMapping";
 
 function App({ signOut, user }) {
-  const [content, setContent] = useState({ title: "", text: "", link: "" });
+  const [content, setContent] = useState({
+    title: "",
+    text: "",
+    sourceName: "",
+    sourceType: "",
+    link: "",
+  });
 
   return (
     <>

@@ -110,6 +110,12 @@ function SubmitMapping({ content, suggestions }) {
     contentText: {
       children: content.text,
     },
+    "Name of source29766863": {
+      children: content.sourceName,
+    },
+    "Type of source40831002": {
+      children: content.sourceType,
+    },
     URL: {
       children: content.link,
     },
