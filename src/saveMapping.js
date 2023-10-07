@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import axios from "axios";
 
-function SaveMapping({ content, checked }) {
+function SaveMapping({ content, ntsaChecked, epaChecked }) {
   const useAxiosPost = (url, payload, headers) => {
     const [data, setData] = useState(null);
     const [error, setError] = useState("");
@@ -17,22 +17,27 @@ function SaveMapping({ content, checked }) {
           .catch((error) => setError(error.message))
           .finally(() => setLoaded(true));
       }
-    }, []);
+    }, [url, payload, headers]);
 
     return { data, error, loaded };
   };
 
   const skills = [];
 
-  checked.forEach((element) => {
+  ntsaChecked.forEach((element) => {
     const obj = { SkillType: 3, SkillId: parseInt(element), PrimarySkill: 1 };
     skills.push(obj);
   });
 
+  epaChecked.forEach((element) => {
+    const obj = { SkillType: 2, SkillId: parseInt(element), PrimarySkill: 1 };
+    skills.push(obj);
+  });
+
   const apidata = JSON.stringify({
-    SourceId: "User Input test",
+    SourceId: content.sourceName,
     Id: "Test_web_app",
-    ResourceType: 2,
+    ResourceType: Number(content.sourceType),
     ResourceLocation: content.link,
     ResourceTitle: content.title,
     ResourceDescription: content.text,

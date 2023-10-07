@@ -6,58 +6,33 @@ import React, { useState, useEffect, useRef } from "react";
 import { ArticleFull } from "./ui-components";
 import CheckboxTree from "react-checkbox-tree";
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
-import { Button, Divider } from "@aws-amplify/ui-react";
+import { Button, Divider, Tabs, TabItem } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import SaveMapping from "./saveMapping";
 import axios from "axios";
 
-function SubmitMapping({ content, suggestions }) {
-  const [categories, setCategories] = useState([]);
-  const [checked, setChecked] = useState(suggestions);
-  const [expanded, setExpanded] = useState([]);
+function SubmitMapping({ content, ntsaSuggestions, epaSuggestions }) {
+  const [ntsaCategories, setNtsaCategories] = useState([]);
+  const [ntsaChecked, setNtsaChecked] = useState(ntsaSuggestions);
+  const [ntsaExpanded, setNtsaExpanded] = useState([]);
+  const [epaCategories, setEpaCategories] = useState([]);
+  const [epaChecked, setEpaChecked] = useState(epaSuggestions);
+  const [epaExpanded, setEpaExpanded] = useState([]);
   const [triggerSave, setTriggerSave] = useState(false);
-  const parentSet = new Set();
-  // parentSet is global to collect all ancestors of suggestions,
-  //  updated by getCategories()
-
-  const useAxiosPost = (url, payload, headers) => {
-    const [data, setData] = useState(null);
-    const [error, setError] = useState("");
-    const [loaded, setLoaded] = useState(false);
-    const categoriesPostedRef = useRef(false);
-
-    useEffect(() => {
-      if (!categoriesPostedRef.current) {
-        categoriesPostedRef.current = true;
-        axios
-          .post(url, payload, headers)
-          .then((response) => setData(response.data))
-          .catch((error) => setError(error.message))
-          .finally(() => setLoaded(true));
-      }
-    }, []);
-
-    return { data, error, loaded };
-  };
-
-  const apidata = JSON.stringify({
-    table: "SituationalOutline",
-  });
-
-  const { data, error, loaded } = useAxiosPost(
-    "https://emory.wolftechnology.net/services/outline/",
-    apidata
-  );
 
   // getCategories
-  // Args - none
+  // Args - data: dict from API call to /outline
+  //        suggestions: array of suggested checkboxes from ML model
   // Returns
-  //  Nested array of nodes formatted for CheckboxTree, also includes
+  //  res.nodes: Nested array of nodes formatted for CheckboxTree, also includes
   //  array of ancestors with each node to make tree expansion easier
-  function getCategories() {
-    const res = [];
+  //  res.set: Set of parent nodes for displaying tree with prechecked nodes
+  function getCategories(data, suggestions) {
+    const res = {};
+    const result_nodes = [];
     const nodes = data.Nodes;
+    const parentSet = new Set();
 
     function recurse(obj, parents) {
       const category = {};
@@ -89,20 +64,71 @@ function SubmitMapping({ content, suggestions }) {
     }
 
     nodes.forEach((node) => {
-      res.push(recurse(node));
+      result_nodes.push(recurse(node));
     });
+
+    res.nodes = result_nodes;
+    res.set = parentSet;
 
     return res;
   }
 
-  if (categories.length === 0 && data) {
-    setCategories(getCategories());
+  function useAxiosPost() {
+    const [ntsaResults, setNtsaResults] = useState(null);
+    const [epaResults, setEpaResults] = useState(null);
+    const [error, setError] = useState("");
+    const [loaded, setLoaded] = useState(false);
+    const categoriesPostedRef = useRef(false);
+
+    useEffect(() => {
+      if (!categoriesPostedRef.current) {
+        categoriesPostedRef.current = true;
+        axios
+          .all([
+            axios.post("https://emory.wolftechnology.net/services/outline/", {
+              table: "SituationalOutline",
+            }),
+            axios.post("https://emory.wolftechnology.net/services/outline/", {
+              table: "EPAOutline",
+            }),
+          ])
+          .then(
+            axios.spread((ntsa, epa) => {
+              setNtsaResults(getCategories(ntsa.data, ntsaSuggestions));
+              setEpaResults(getCategories(epa.data, epaSuggestions));
+            })
+          )
+          .catch((error) => setError(error.message))
+          .finally(() => setLoaded(true));
+      }
+    }, []);
+
+    return { ntsaResults, epaResults, error, loaded };
   }
 
-  if (parentSet.size > 0 && expanded.length === 0) {
-    setExpanded(Array.from(parentSet));
-  }
+  const { ntsaResults, epaResults, error, loaded } = useAxiosPost();
 
+  if (loaded) {
+    if (ntsaResults) {
+      if (ntsaCategories.length === 0) {
+        setNtsaCategories(ntsaResults.nodes);
+      }
+
+      if (ntsaResults.set.size > 0 && ntsaExpanded.length === 0) {
+        setNtsaExpanded(Array.from(ntsaResults.set));
+      }
+    }
+
+    if (epaResults) {
+      if (epaCategories.length === 0) {
+        setEpaCategories(epaResults.nodes);
+      }
+
+      if (epaResults.set.size > 0 && epaExpanded.length === 0) {
+        setEpaExpanded(Array.from(epaResults.set));
+      }
+    }
+  }
   const overrides = {
     titleText: {
       children: content.title,
@@ -114,7 +140,8 @@ function SubmitMapping({ content, suggestions }) {
       children: content.sourceName,
     },
     "Type of source40831002": {
-      children: content.sourceType,
+      children:
+        content.sourceType === "1" ? "Quiz bank item" : "Journal article",
     },
     URL: {
       children: content.link,
@@ -127,17 +154,33 @@ function SubmitMapping({ content, suggestions }) {
     ) : (
       <>
         <ArticleFull overrides={overrides} />
-        <h3 style={{ marginLeft: 20, marginBottom: 0 }}>NTSA Categories</h3>
-        <div style={{ marginLeft: 20, marginBottom: 20 }}>
-          <CheckboxTree
-            nodes={categories}
-            checked={checked}
-            expanded={expanded}
-            onCheck={(checked) => setChecked(checked)}
-            onExpand={(expanded) => setExpanded(expanded)}
-            noCascade={true}
-          />
-        </div>
+        <h3 style={{ marginLeft: 20, marginBottom: 0 }}>Competency Mapping</h3>
+        <Tabs justifyContent="flex-start">
+          <TabItem title="NTSA">
+            <div style={{ marginTop: 20, marginLeft: 20, marginBottom: 20 }}>
+              <CheckboxTree
+                nodes={ntsaCategories}
+                checked={ntsaChecked}
+                expanded={ntsaExpanded}
+                onCheck={(ntsaChecked) => setNtsaChecked(ntsaChecked)}
+                onExpand={(ntsaExpanded) => setNtsaExpanded(ntsaExpanded)}
+                noCascade={true}
+              />
+            </div>
+          </TabItem>
+          <TabItem title="EPA">
+            <div style={{ marginTop: 20, marginLeft: 20, marginBottom: 20 }}>
+              <CheckboxTree
+                nodes={epaCategories}
+                checked={epaChecked}
+                expanded={epaExpanded}
+                onCheck={(epaChecked) => setEpaChecked(epaChecked)}
+                onExpand={(epaExpanded) => setEpaExpanded(epaExpanded)}
+                noCascade={true}
+              />
+            </div>
+          </TabItem>
+        </Tabs>
         <Divider></Divider>
         <div></div>
         <Button
@@ -152,7 +195,11 @@ function SubmitMapping({ content, suggestions }) {
           {...getOverrideProps(overrides, "Submit")}
         />
         {triggerSave ? (
-          <SaveMapping content={content} checked={checked} />
+          <SaveMapping
+            content={content}
+            ntsaChecked={ntsaChecked}
+            epaChecked={epaChecked}
+          />
         ) : null}
       </>
     );

@@ -29,7 +29,13 @@ function App({ signOut, user }) {
           />
           <Route
             path="/submit"
-            element={<SubmitMapping content={content} suggestions={[]} />}
+            element={
+              <SubmitMapping
+                content={content}
+                ntsaSuggestions={[]}
+                epaSuggestions={[]}
+              />
+            }
           />
           <Route
             path="/suggest"

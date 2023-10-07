@@ -72,8 +72,8 @@ function AddContent({ content, setContent }) {
       placeholder: "Select one",
       children: (
         <>
-          <option value="Quiz bank item">Quiz bank item</option>
-          <option value="Journal article">Journal article</option>
+          <option value="1">Quiz bank item</option>
+          <option value="2">Journal article</option>
         </>
       ),
       onChange: handleSourceTypeChange,
